@@ -1,0 +1,79 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id       String @id @default(uuid()) @db.Uuid
+  name     String
+  email    String @unique
+  password String
+
+  @@map("accounts")
+}
+
+enum ClientAcupunCode {
+  SESSAO
+  ELETRICA
+
+  @@map("client_acupun_code")
+}
+
+model Client {
+  id          String           @id @default(uuid()) @db.Uuid
+  name        String
+  cpf         String           @unique
+  email       String           @unique
+  birthDate   DateTime         @map("birth_date")
+  cid         String
+  phoneNumber String           @map("phone_number")
+  acupunCode  ClientAcupunCode @map("acupun_code")
+
+  address Address[]
+  unimed  Unimed[]
+
+  @@map("clients")
+}
+
+model Address {
+  id           String  @id @default(uuid()) @db.Uuid
+  clientId     String  @map("client_id") @db.Uuid
+  cep          String
+  state        String
+  city         String
+  neighborhood String
+  street       String
+  number       Decimal
+  others       String
+
+  client Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  @@map("address")
+}
+
+enum UnimedType {
+  POA
+  COERMA
+  SEGUROS
+
+  @@map("unimed_type")
+}
+
+model Unimed {
+  id       String     @id @default(uuid()) @db.Uuid
+  clientId String     @map("client_id") @db.Uuid
+  name     String
+  icon     String
+  type     UnimedType
+
+  client Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  @@map("unimeds")
+}
