@@ -32,6 +32,7 @@ model Client {
   cpf         String           @unique
   email       String           @unique
   birthDate   DateTime         @map("birth_date")
+  localBirth  String           @default("") @map("local_birth")
   cid         String
   phoneNumber String           @map("phone_number")
   acupunCode  ClientAcupunCode @map("acupun_code")

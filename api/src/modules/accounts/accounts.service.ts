@@ -43,6 +43,15 @@ export class AccountsService {
   async update(id: string, updateAccountDto: UpdateAccountDto) {
     const { name, email, password } = updateAccountDto;
 
+    const emailTaken = await this.prismaService.account.findUnique({
+      where: { email },
+      select: { id: true },
+    });
+
+    if (emailTaken) {
+      throw new ConflictException('This email is already in use.');
+    }
+
     const hashedPassword = await hash(password, 12);
 
     await this.prismaService.account.update({
@@ -54,7 +63,10 @@ export class AccountsService {
       },
     });
 
-    return `The ${name} account's has been updated.`;
+    return {
+      message: `The client ${name} has been updated.`,
+      name: name,
+    };
   }
 
   async remove(id: string) {
