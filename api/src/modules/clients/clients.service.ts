@@ -3,13 +3,13 @@ import {
   ConflictException,
   Injectable,
 } from '@nestjs/common';
-import { PrismaService } from '../../database/prisma.service';
+import { ClientsReposiory } from 'src/shared/database/repositories/clients.repositories';
 import { CreateClientDto } from './dto/create-client.dto';
 import { UpdateClientDto } from './dto/update-client.dto';
 
 @Injectable()
 export class ClientsService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(private readonly clientsRepo: ClientsReposiory) {}
 
   async create(createClientDto: CreateClientDto) {
     const {
@@ -23,7 +23,7 @@ export class ClientsService {
       acupunCode,
     } = createClientDto;
 
-    const emailTaken = await this.prismaService.client.findUnique({
+    const emailTaken = await this.clientsRepo.findUnique({
       where: { email },
       select: { id: true },
     });
@@ -32,7 +32,7 @@ export class ClientsService {
       throw new ConflictException('This email is already in use.');
     }
 
-    const cpfTaken = await this.prismaService.client.findUnique({
+    const cpfTaken = await this.clientsRepo.findUnique({
       where: { cpf },
       select: { id: true },
     });
@@ -41,7 +41,7 @@ export class ClientsService {
       throw new ConflictException('This CPF is already in use.');
     }
 
-    await this.prismaService.client.create({
+    await this.clientsRepo.create({
       data: {
         name,
         cpf,
@@ -51,6 +51,19 @@ export class ClientsService {
         cid,
         phoneNumber,
         acupunCode,
+        address: {
+          createMany: {
+            data: {
+              cep: 'teste',
+              state: 'teste',
+              city: 'teste',
+              neighborhood: 'teste',
+              street: 'teste',
+              number: 123,
+              others: 'teste',
+            },
+          },
+        },
       },
     });
 
@@ -61,13 +74,17 @@ export class ClientsService {
   }
 
   async findAll() {
-    const allClients = await this.prismaService.client.findMany();
+    const allClients = await this.clientsRepo.findMany();
 
     return allClients;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} client`;
+  async findOne(id: string) {
+    const client = await this.clientsRepo.findUnique({
+      where: { id },
+    });
+
+    return client;
   }
 
   async update(id: string, updateClientDto: UpdateClientDto) {
@@ -82,7 +99,16 @@ export class ClientsService {
       acupunCode,
     } = updateClientDto;
 
-    const emailTaken = await this.prismaService.client.findUnique({
+    const getOldEmail = await this.clientsRepo.findUnique({
+      where: { id },
+      select: { email: true },
+    });
+
+    if (getOldEmail.email === email) {
+      throw new ConflictException('This email is the same.');
+    }
+
+    const emailTaken = await this.clientsRepo.findUnique({
       where: { email },
       select: { id: true },
     });
@@ -91,7 +117,7 @@ export class ClientsService {
       throw new ConflictException('This email is already in use.');
     }
 
-    const getOldCPF = await this.prismaService.client.findUnique({
+    const getOldCPF = await this.clientsRepo.findUnique({
       where: { id },
       select: { cpf: true },
     });
@@ -100,7 +126,7 @@ export class ClientsService {
       throw new ConflictException('This CPF is the same.');
     }
 
-    const cpfTaken = await this.prismaService.client.findUnique({
+    const cpfTaken = await this.clientsRepo.findUnique({
       where: { cpf },
       select: { id: true },
     });
@@ -109,7 +135,7 @@ export class ClientsService {
       throw new ConflictException('This CPF is already in use.');
     }
 
-    await this.prismaService.client.update({
+    await this.clientsRepo.update({
       where: { id },
       data: {
         name,
@@ -131,7 +157,7 @@ export class ClientsService {
 
   async remove(id: string) {
     try {
-      await this.prismaService.client.delete({
+      await this.clientsRepo.delete({
         where: { id },
       });
     } catch {

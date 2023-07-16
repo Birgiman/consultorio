@@ -5,6 +5,7 @@ import {
   IsNotEmpty,
   IsPhoneNumber,
   IsString,
+  Length,
   MinLength,
 } from 'class-validator';
 import { ClientType } from '../entities/ClientEntities';
@@ -17,7 +18,7 @@ export class CreateClientDto {
 
   @IsString()
   @IsNotEmpty()
-  @MinLength(14)
+  @Length(14, 14)
   cpf: string;
 
   @IsString()

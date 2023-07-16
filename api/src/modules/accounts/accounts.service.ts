@@ -4,18 +4,18 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { hash } from 'bcryptjs';
-import { PrismaService } from '../../database/prisma.service';
+import { AccountsRepository } from 'src/shared/database/repositories/accounts.repositories';
 import { CreateAccountDto } from './dto/create-account.dto';
 import { UpdateAccountDto } from './dto/update-account.dto';
 
 @Injectable()
 export class AccountsService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(private readonly accountsRepo: AccountsRepository) {}
 
   async create(createAccountDto: CreateAccountDto) {
     const { name, email, password } = createAccountDto;
 
-    const emailTaken = await this.prismaService.account.findUnique({
+    const emailTaken = await this.accountsRepo.findUnique({
       where: { email },
       select: { id: true },
     });
@@ -26,7 +26,7 @@ export class AccountsService {
 
     const hashedPassword = await hash(password, 12);
 
-    const account = await this.prismaService.account.create({
+    const account = await this.accountsRepo.create({
       data: {
         name,
         email,
@@ -43,7 +43,7 @@ export class AccountsService {
   async update(id: string, updateAccountDto: UpdateAccountDto) {
     const { name, email, password } = updateAccountDto;
 
-    const emailTaken = await this.prismaService.account.findUnique({
+    const emailTaken = await this.accountsRepo.findUnique({
       where: { email },
       select: { id: true },
     });
@@ -54,7 +54,7 @@ export class AccountsService {
 
     const hashedPassword = await hash(password, 12);
 
-    await this.prismaService.account.update({
+    await this.accountsRepo.update({
       where: { id },
       data: {
         name,
@@ -71,7 +71,7 @@ export class AccountsService {
 
   async remove(id: string) {
     try {
-      await this.prismaService.account.delete({
+      await this.accountsRepo.delete({
         where: { id },
       });
     } catch {
