@@ -14,8 +14,8 @@ export class AddressRepository {
     return this.prismaService.address.findMany();
   }
 
-  findAddressBy(findAddressByDto: Prisma.AddressFindManyArgs) {
-    return this.prismaService.address.findMany(findAddressByDto);
+  findAddressBy(findFirstDto: Prisma.AddressFindFirstArgs) {
+    return this.prismaService.address.findFirst(findFirstDto);
   }
 
   update(updateDto: Prisma.AddressUpdateArgs) {
