@@ -2,23 +2,23 @@ import {
   Body,
   Controller,
   Delete,
+  Get,
   HttpCode,
   HttpStatus,
   Param,
-  Post,
   Put,
 } from '@nestjs/common';
+import { ActiveAccountId } from 'src/shared/decorators/activeAccountId';
 import { AccountsService } from './accounts.service';
-import { CreateAccountDto } from './dto/create-account.dto';
 import { UpdateAccountDto } from './dto/update-account.dto';
 
 @Controller('accounts')
 export class AccountsController {
   constructor(private readonly accountsService: AccountsService) {}
 
-  @Post()
-  create(@Body() createAccountDto: CreateAccountDto) {
-    return this.accountsService.create(createAccountDto);
+  @Get('/me')
+  me(@ActiveAccountId() accountId: string) {
+    return this.accountsService.getAccountById(accountId);
   }
 
   @Put(':id')

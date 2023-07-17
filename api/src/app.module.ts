@@ -1,6 +1,9 @@
 import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
 import { AccountsModule } from './modules/accounts/accounts.module';
 import { AddressModule } from './modules/address/address.module';
+import { AuthGuard } from './modules/auth/auth.guard';
+import { AuthModule } from './modules/auth/auth.module';
 import { ClientsModule } from './modules/clients/clients.module';
 import { UnimedsModule } from './modules/unimeds/unimeds.module';
 import { DatabaseModule } from './shared/database/database.module';
@@ -12,8 +15,14 @@ import { DatabaseModule } from './shared/database/database.module';
     AddressModule,
     UnimedsModule,
     DatabaseModule,
+    AuthModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+  ],
 })
 export class AppModule {}
