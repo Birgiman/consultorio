@@ -6,7 +6,6 @@ import {
   HttpCode,
   HttpStatus,
   Param,
-  ParseIntPipe,
   Post,
   Put,
   Query,
@@ -25,16 +24,12 @@ export class AddressController {
   }
 
   @Get()
-  findAll() {
-    return this.addressService.findAll();
-  }
-
-  @Get()
-  findOne(
-    @Query('cep', ParseIntPipe) cep: string,
-    @Query('number', ParseIntPipe) number: number,
+  findAddressBy(
+    @Query('city') city: string,
+    @Query('cep') cep: string,
+    @Query('number') number: number,
   ) {
-    return this.addressService.findAddressBy({ cep, number });
+    return this.addressService.findAddressBy({ city, cep, number });
   }
 
   @Put(':id')
