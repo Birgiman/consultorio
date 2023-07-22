@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { UnimedsRepository } from 'src/shared/database/repositories/unimeds.repositories';
 import { CreateUnimedDto } from './dto/create-unimed.dto';
 import { UpdateUnimedDto } from './dto/update-unimed.dto';
@@ -10,6 +10,14 @@ export class UnimedsService {
 
   async create(createUnimedDto: CreateUnimedDto) {
     const { clientId, name, icon, type } = createUnimedDto;
+
+    const haveUnimed = await this.unimedsRepo.findFirst({
+      where: { clientId },
+    });
+
+    if (haveUnimed) {
+      throw new BadRequestException('You already have a Unimed.');
+    }
 
     const unimed = await this.unimedsRepo.create({
       data: {
@@ -23,22 +31,30 @@ export class UnimedsService {
     return unimed;
   }
 
-  async findAll() {
-    const unimeds = await this.unimedsRepo.findMany();
-
-    return unimeds;
-  }
-
-  async findByUnimedType(filter: { type: UnimedType }) {
-    const clientsByUnimed = await this.unimedsRepo.findByUnimedId({
-      where: { type: filter.type },
+  async findUnimedsBy(filters: { type: UnimedType }) {
+    return await this.unimedsRepo.findUnimedsBy({
+      where: { type: filters.type },
     });
-
-    return clientsByUnimed;
   }
 
   async update(id: string, updateUnimedDto: UpdateUnimedDto) {
     const { clientId, icon, name, type } = updateUnimedDto;
+
+    const clientExists = await this.unimedsRepo.findFirst({
+      where: { clientId },
+    });
+
+    if (!clientExists) {
+      throw new BadRequestException('Client not found.');
+    }
+
+    const unimedExists = await this.unimedsRepo.findUnique({
+      where: { id },
+    });
+
+    if (!unimedExists) {
+      throw new BadRequestException('Unimed not found!');
+    }
 
     const unimedUpdated = await this.unimedsRepo.update({
       where: { id },

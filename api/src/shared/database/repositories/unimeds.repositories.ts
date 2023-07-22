@@ -10,11 +10,15 @@ export class UnimedsRepository {
     return this.prismaService.unimed.create(createDto);
   }
 
-  findMany() {
-    return this.prismaService.unimed.findMany();
+  findFirst(findFirstDto: Prisma.UnimedFindFirstArgs) {
+    return this.prismaService.unimed.findFirst(findFirstDto);
   }
 
-  findByUnimedId(unimedType: Prisma.UnimedFindManyArgs) {
+  findUnique(findUniqueDto: Prisma.UnimedFindUniqueArgs) {
+    return this.prismaService.unimed.findUnique(findUniqueDto);
+  }
+
+  findUnimedsBy(unimedType: Prisma.UnimedFindManyArgs) {
     return this.prismaService.unimed.findMany(unimedType);
   }
 

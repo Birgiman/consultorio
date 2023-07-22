@@ -51,19 +51,6 @@ export class ClientsService {
         cid,
         phoneNumber,
         acupunCode,
-        address: {
-          createMany: {
-            data: {
-              cep: 'teste',
-              state: 'teste',
-              city: 'teste',
-              neighborhood: 'teste',
-              street: 'teste',
-              number: 123,
-              others: 'teste',
-            },
-          },
-        },
       },
     });
 
@@ -82,6 +69,7 @@ export class ClientsService {
   async findOne(id: string) {
     const client = await this.clientsRepo.findUnique({
       where: { id },
+      include: { address: true, unimed: true },
     });
 
     return client;

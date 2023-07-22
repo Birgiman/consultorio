@@ -8,6 +8,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { CreateUnimedDto } from './dto/create-unimed.dto';
 import { UpdateUnimedDto } from './dto/update-unimed.dto';
@@ -24,13 +25,8 @@ export class UnimedsController {
   }
 
   @Get()
-  findAll() {
-    return this.unimedsService.findAll();
-  }
-
-  @Get()
-  findOne(@Param('type') type: UnimedType) {
-    return this.unimedsService.findByUnimedType({ type });
+  findUnimedsBy(@Query('type') type: UnimedType) {
+    return this.unimedsService.findUnimedsBy({ type });
   }
 
   @Put(':id')

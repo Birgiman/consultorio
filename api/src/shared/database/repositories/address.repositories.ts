@@ -10,6 +10,14 @@ export class AddressRepository {
     return this.prismaService.address.create(createDto);
   }
 
+  findFirst(findFirstDto: Prisma.AddressFindFirstArgs) {
+    return this.prismaService.address.findFirst(findFirstDto);
+  }
+
+  findUnique(findUniqueDto: Prisma.AddressFindUniqueArgs) {
+    return this.prismaService.address.findUnique(findUniqueDto);
+  }
+
   findAddressBy(findAddressByDto: Prisma.AddressFindManyArgs) {
     return this.prismaService.address.findMany(findAddressByDto);
   }

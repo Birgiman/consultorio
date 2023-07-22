@@ -8,12 +8,14 @@ import {
   Length,
   MinLength,
 } from 'class-validator';
+import { IsFullName } from '../../../shared/customClassValidators/IsFullName';
 import { ClientType } from '../entities/ClientEntities';
 
 export class CreateClientDto {
   @IsString()
   @IsNotEmpty()
   @MinLength(3)
+  @IsFullName()
   name: string;
 
   @IsString()

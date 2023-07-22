@@ -44,16 +44,40 @@ export class AddressService {
   }
 
   async update(id: string, updateAddressDto: UpdateAddressDto) {
+    const { clientId, state, city, cep, neighborhood, street, number, others } =
+      updateAddressDto;
+
+    const addressExists = await this.addressRepo.findUnique({
+      where: { id },
+    });
+
+    if (!addressExists) {
+      throw new BadRequestException('Address not found.');
+    }
+
+    const clientExists = await this.addressRepo.findFirst({
+      where: { clientId },
+    });
+
+    if (!clientExists) {
+      throw new BadRequestException('Client not found.');
+    }
+
+    const [normalizedCity, normalizedNeighborhood] = removeAccents(
+      city,
+      neighborhood,
+    );
+
     const updatedAddress = await this.addressRepo.update({
       where: { id },
       data: {
-        cep: updateAddressDto.cep,
-        state: updateAddressDto.state,
-        city: updateAddressDto.city,
-        neighborhood: updateAddressDto.neighborhood,
-        street: updateAddressDto.street,
-        number: updateAddressDto.number,
-        others: updateAddressDto.others,
+        state,
+        city: normalizedCity,
+        cep,
+        neighborhood: normalizedNeighborhood,
+        street,
+        number,
+        others,
       },
     });
 
