@@ -69,7 +69,7 @@ export class ClientsService {
   async findOne(id: string) {
     const client = await this.clientsRepo.findUnique({
       where: { id },
-      include: { address: true, unimed: true },
+      include: { address: true, unimed: true, time_slot_reservation: true },
     });
 
     return client;

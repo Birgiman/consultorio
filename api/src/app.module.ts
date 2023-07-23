@@ -7,6 +7,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { ClientsModule } from './modules/clients/clients.module';
 import { UnimedsModule } from './modules/unimeds/unimeds.module';
 import { DatabaseModule } from './shared/database/database.module';
+import { TimeSlotReservationModule } from './modules/time-slot-reservation/time-slot-reservation.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { DatabaseModule } from './shared/database/database.module';
     UnimedsModule,
     DatabaseModule,
     AuthModule,
+    TimeSlotReservationModule,
   ],
   controllers: [],
   providers: [

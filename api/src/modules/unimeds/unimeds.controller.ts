@@ -6,6 +6,7 @@ import {
   HttpCode,
   HttpStatus,
   Param,
+  ParseUUIDPipe,
   Post,
   Put,
   Query,
@@ -13,7 +14,7 @@ import {
 import { CreateUnimedDto } from './dto/create-unimed.dto';
 import { UpdateUnimedDto } from './dto/update-unimed.dto';
 import { UnimedType } from './entities/UnimedEntities';
-import { UnimedsService } from './unimeds.service';
+import { UnimedsService } from './services/unimeds.service';
 
 @Controller('unimeds')
 export class UnimedsController {
@@ -30,7 +31,10 @@ export class UnimedsController {
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateUnimedDto: UpdateUnimedDto) {
+  update(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() updateUnimedDto: UpdateUnimedDto,
+  ) {
     return this.unimedsService.update(id, updateUnimedDto);
   }
 

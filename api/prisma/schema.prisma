@@ -37,8 +37,9 @@ model Client {
   phoneNumber String           @map("phone_number")
   acupunCode  ClientAcupunCode @map("acupun_code")
 
-  address Address[]
-  unimed  Unimed[]
+  address               Address[]
+  unimed                Unimed[]
+  time_slot_reservation TimeSlotReservation[]
 
   @@map("clients")
 }
@@ -77,4 +78,29 @@ model Unimed {
   client Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
 
   @@map("unimeds")
+}
+
+enum TimeSlotReservationStatus {
+  SCHEDULED
+  CONFIRMED
+  CANCELED
+  COMPLETED
+}
+
+enum TimeSlotReservationPeriod {
+  MORNING
+  AFTERNOON
+  EVENING
+}
+
+model TimeSlotReservation {
+  id       String                    @id @default(uuid()) @db.Uuid
+  clientId String                    @map("client_id") @db.Uuid
+  date     DateTime
+  status   TimeSlotReservationStatus
+  period   TimeSlotReservationPeriod
+
+  client Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  @@map("time_slot_reservation")
 }
