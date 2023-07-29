@@ -12,8 +12,8 @@ export function Router() {
 
         <Route element={<AuthGuard isPrivate={false} />}>
           <Route element={<AuthLayout />}>
-          <Route path='/auth/login' element={<Login />} />
-          <Route path='/auth/register' element={<Register />} />
+            <Route path='/auth/login' element={<Login />} />
+            <Route path='/auth/register' element={<Register />} />
           </Route>
         </Route>
 
@@ -23,5 +23,5 @@ export function Router() {
         </Route>
       </Routes>
     </BrowserRouter>
-  )
+  );
 }
