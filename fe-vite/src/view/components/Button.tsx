@@ -10,7 +10,7 @@ export function Button({ className, ...props }: ButtonProps) {
     <button
       {...props}
       className={cn(
-        'bg-amber-700 hover:bg-amber-600 active:bg-amber-800 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed px-6 h-12 rounded-2xl font-medium text-white transition-all',
+        'bg-spectra-700 hover:bg-spectra-600 active:bg-spectra-800 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed px-6 h-12 rounded-2xl font-medium text-white transition-all',
         className,
       )}
     />

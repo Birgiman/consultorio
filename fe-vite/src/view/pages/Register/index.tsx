@@ -19,7 +19,7 @@ export function Register() {
           </span>
           <Link
             to='/auth/login'
-            className='tracking-[-0.5px] font-medium text-amber-700' >
+            className='tracking-[-0.5px] font-medium text-spectra-700' >
             Fazer Login
           </Link>
         </p>

@@ -19,7 +19,7 @@ export function Login() {
           </span>
           <Link
             to='/auth/register'
-            className='tracking-[-0.5px] font-medium text-amber-700' >
+            className='tracking-[-0.5px] font-medium text-spectra-700' >
             Criar conta
           </Link>
         </p>
