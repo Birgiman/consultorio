@@ -6,12 +6,16 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors({
-    origin: 'http://localhost:5173',
+    origin: 'consultorio-alpha.vercel.app',
     credentials: true,
   });
 
   app.useGlobalPipes(new ValidationPipe());
 
-  await app.listen(4000);
+  const port = process.env.PORT ? Number(process.env.PORT) : 3333;
+
+  await app.listen(port, '0.0.0.0').then(() => {
+    console.log(`🚀 HTTP server running at -> ${port}`);
+  });
 }
 bootstrap();
