@@ -5,7 +5,7 @@ import { useRegisterController } from './useRegisterController';
 
 export function Register() {
 
-  const { register, errors, handleSubmit } = useRegisterController();
+  const { register, errors, handleSubmit, isLoading } = useRegisterController();
 
   return (
     <>
@@ -50,6 +50,7 @@ export function Register() {
         <Button
           type='submit'
           className='mt-2'
+          isLoading={isLoading}
         >
           Criar conta
         </Button>
