@@ -5,8 +5,10 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  const frontEndURL = 'https://consultorio-alpha.vercel.app';
+
   app.enableCors({
-    origin: 'consultorio-alpha.vercel.app',
+    origin: frontEndURL,
     credentials: true,
   });
 
