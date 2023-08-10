@@ -32,8 +32,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem(localStorageKeys.ACCESS_TOKEN, accessToken);
 
     setSignedIn(true);
-
-    console.log('isSuccess', isSuccess);
   }, []);
 
   const signout = useCallback(() => {
