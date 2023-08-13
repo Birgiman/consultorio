@@ -8,9 +8,9 @@ interface SplashScreenProps {
 
 export function SplashScreen({ isLoading }: SplashScreenProps) {
   return (
-    <div className='fixed inset-0 w-full h-full'>
+    <>
       <Transition
-        className='relative w-full h-full flex items-center justify-center'
+        className='fixed w-full h-full flex items-center justify-center'
         appear={true}
         show={isLoading}
         enter="duration-[400ms] transition ease-in-out"
@@ -25,7 +25,7 @@ export function SplashScreen({ isLoading }: SplashScreenProps) {
           isLoading && 'animate-bounce'
         )} />
       </Transition>
-    </div>
+    </>
   );
 }
 
