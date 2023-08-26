@@ -1,8 +1,10 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AuthLayout } from '../view/layouts/AuthLayout';
-import { Dashboard } from '../view/pages/Dashboard';
+import { DashboardLayout } from '../view/layouts/DashboardLayout';
+import { Accounts } from '../view/pages/Accounts';
 import { Login } from '../view/pages/Login';
 import { Register } from '../view/pages/Register';
+import { Schedule } from '../view/pages/Schedule';
 import { AuthGuard } from './AuthGuard';
 
 export function Router() {
@@ -19,7 +21,10 @@ export function Router() {
 
 
         <Route element={<AuthGuard isPrivate />}>
-          <Route path='/' element={<Dashboard />} />
+          <Route element={<DashboardLayout />}>
+            <Route path='/dashboard/schedule' element={<Schedule />} />
+            <Route path='/dashboard/accounts' element={<Accounts />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
