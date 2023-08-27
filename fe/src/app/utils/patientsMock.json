@@ -238,5 +238,45 @@
         "period": "MORNING"
       }
     ]
+  },
+  {
+    "id": "c3c83835-b655-419-a155-795880fa68f7",
+    "name": "Roberto Oliveira",
+    "cpf": "56789012345678",
+    "email": "client+6@mail.com",
+    "birthDate": "1985-09-20T14:15:00.000Z",
+    "localBirth": "BH - MG",
+    "cid": "901234567",
+    "phoneNumber": "+5511912345678",
+    "acupunCode": "ELETRICA",
+    "timeSlotReservation": [
+      {
+        "id": "21c4d5e6-f7g8-h9i0-1j2k-3l4m5n6o2p8",
+        "clientId": "c3c83835-b655-419-a155-795880fa68f7",
+        "date": "2023-08-11T09:00:00.000Z",
+        "status": "SCHEDULED",
+        "period": "MORNING"
+      }
+    ]
+  },
+  {
+    "id": "c3c83135-b655-419-a155-725880fa68f7",
+    "name": "Roberto Oliveira",
+    "cpf": "56789012345678",
+    "email": "client+6@mail.com",
+    "birthDate": "1985-09-20T14:15:00.000Z",
+    "localBirth": "BH - MG",
+    "cid": "901234567",
+    "phoneNumber": "+5511912345678",
+    "acupunCode": "ELETRICA",
+    "timeSlotReservation": [
+      {
+        "id": "21c4d5e6-f3g8-h9i0-1j2k-3l4m5n6o7p8",
+        "clientId": "c3c83135-b655-419-a155-725880fa68f7",
+        "date": "2023-08-11T09:00:00.000Z",
+        "status": "SCHEDULED",
+        "period": "MORNING"
+      }
+    ]
   }
 ]

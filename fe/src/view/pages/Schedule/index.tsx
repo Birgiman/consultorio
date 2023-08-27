@@ -1,7 +1,7 @@
 import { ListBulletIcon, PlusIcon, TrashIcon } from '@radix-ui/react-icons';
 
 import { Button } from '../../components/Button';
-import { TableRadixUi } from './components/tableByRadixUi';
+import { Table } from './components/tableByRadixUi';
 
 export function Schedule() {
   return (
@@ -11,7 +11,7 @@ export function Schedule() {
           <strong className='text-3xl text-spectra-600'>
               AGENDA
           </strong>
-          <div className='flex gap-2'>
+          <div className='flex gap-2 text-lg'>
             <Button className='text-white hover:text-indian-khaki-300 active:text-indian-khaki-500'>
               <TrashIcon className='mr-2' />
                 Deletar
@@ -26,7 +26,7 @@ export function Schedule() {
             </Button>
           </div>
         </header>
-        <TableRadixUi />
+        <Table />
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ import * as ScrollArea from '@radix-ui/react-scroll-area';
 import { formateTimeSlotReservation } from '../../../../app/utils/formatTimeSlotReservation';
 import patientsMock from '../../../../app/utils/patientsMock.json';
 
-export function TableRadixUi() {
+export function Table() {
   return (
     <div className='rounded-xl border-spectra-500 border-y-[1.5px]'>
       <div className='flex w-full items-center bg-indian-khaki-300 py-3 pr-2.5 rounded-t-xl'>
@@ -54,16 +54,16 @@ export function TableRadixUi() {
                     {patient.timeSlotReservation.map(reservation => reservation.status)}
                   </p>
                 </div>
-                <div className='flex items-center justify-center py-2 space-x-1 w-1/3 text-white font-bold'>
-                  <button className='flex items-center justify-center bg-spectra-600/95 border rounded-md py-[1px] px-1'>
+                <div className='flex items-center justify-center py-2 space-x-1 w-1/3 text-white font-bold text-sm'>
+                  <button className='flex items-center justify-center bg-spectra-600/95 border rounded-md min-w-[80px] py-[1px] px-1'>
                     <CheckIcon className='w-3 mr-1' />
                       Confirmar
                   </button>
-                  <button className='flex items-center justify-center bg-indian-khaki-500 border rounded-md py-[1px] px-1'>
+                  <button className='flex items-center justify-center bg-indian-khaki-500 border rounded-md min-w-[80px] py-[1px] px-1'>
                     <ResetIcon className='w-3 mr-1' />
                       Reagendar
                   </button>
-                  <button className='flex items-center justify-center bg-red-500/95 border rounded-md py-[1px] px-1'>
+                  <button className='flex items-center justify-center bg-red-500/95 border rounded-md min-w-[80px] py-[1px] px-1'>
                     <Cross1Icon className='w-3 mr-1' />
                       Cancelar
                   </button>
@@ -73,18 +73,18 @@ export function TableRadixUi() {
           ))}
         </ScrollArea.Viewport>
         <ScrollArea.Scrollbar
-          className="flex select-none touch-none p-0.5 bg-black transition-colors duration-[160ms] ease-out hover:bg-black/70 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
+          className="flex select-none touch-none p-0.5 bg-indian-khaki-500 transition-colors duration-[160ms] ease-out hover:bg-indian-khaki-500/80 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
           orientation="vertical"
         >
-          <ScrollArea.Thumb className="flex-1 bg-green-500 rounded-[10px] relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-full before:h-full before:min-w-[44px] before:min-h-[44px]" />
+          <ScrollArea.Thumb className="flex-1 bg-indian-khaki-300 rounded-[10px] relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-full before:h-full before:min-w-[44px] before:min-h-[44px]" />
         </ScrollArea.Scrollbar>
         <ScrollArea.Scrollbar
-          className="flex select-none touch-none p-0.5 bg-black/60 transition-colors duration-[160ms] ease-out hover:bg-blackA8 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
+          className="flex select-none touch-none p-0.5 bg-indian-khaki-500/60 transition-colors duration-[160ms] ease-out hover:bg-indian-khaki-500 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
           orientation="horizontal"
         >
-          <ScrollArea.Thumb className="flex-1 bg-green-500 rounded-[10px] relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-full before:h-full before:min-w-[44px] before:min-h-[44px]" />
+          <ScrollArea.Thumb className="flex-1 bg-indian-khaki-300 rounded-[10px] relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-full before:h-full before:min-w-[44px] before:min-h-[44px]" />
         </ScrollArea.Scrollbar>
-        <ScrollArea.Corner className="bg-yellow-500" />
+        <ScrollArea.Corner className="bg-indian-khaki-600" />
       </ScrollArea.Root>
     </div>
   );
