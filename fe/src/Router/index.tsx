@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { AuthLayout } from '../view/layouts/AuthLayout';
 import { DashboardLayout } from '../view/layouts/DashboardLayout';
 import { Accounts } from '../view/pages/Accounts';
@@ -11,6 +11,8 @@ export function Router() {
   return (
     <BrowserRouter>
       <Routes>
+
+        <Route path="/" element={<Navigate to="/auth/login" replace />} />
 
         <Route element={<AuthGuard isPrivate={false} />}>
           <Route element={<AuthLayout />}>

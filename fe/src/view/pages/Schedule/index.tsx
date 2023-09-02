@@ -1,7 +1,7 @@
 import { ListBulletIcon, PlusIcon, TrashIcon } from '@radix-ui/react-icons';
 
 import { Button } from '../../components/Button';
-import { Table } from './components/tableByRadixUi';
+import { Table } from './components/Table';
 
 export function Schedule() {
   return (
@@ -12,15 +12,15 @@ export function Schedule() {
               AGENDA
           </strong>
           <div className='flex gap-2 text-lg'>
-            <Button className='text-white hover:text-indian-khaki-300 active:text-indian-khaki-500'>
+            <Button className='text-white hover:text-indian-khaki-300 active:text-indian-khaki-500 shadow-md shadow-indian-khaki-500'>
               <TrashIcon className='mr-2' />
                 Deletar
             </Button>
-            <Button className='text-white hover:text-indian-khaki-300 active:text-indian-khaki-500'>
+            <Button className='text-white hover:text-indian-khaki-300 active:text-indian-khaki-500 shadow-md shadow-indian-khaki-500'>
               <ListBulletIcon className='mr-2' />
                 Filtros
             </Button>
-            <Button className='text-white hover:text-indian-khaki-300 active:text-indian-khaki-500'>
+            <Button className='text-white hover:text-indian-khaki-300 active:text-indian-khaki-500 shadow-md shadow-indian-khaki-500'>
               <PlusIcon className='mr-2' />
                 Nova consulta
             </Button>
