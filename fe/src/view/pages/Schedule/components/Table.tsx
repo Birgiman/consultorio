@@ -37,7 +37,7 @@ export function Table() {
       <ScrollArea.Root className="h-[500px] rounded-b-xl overflow-hidden bg-white">
         <ScrollArea.Viewport className="w-full h-full">
           {patientsMock.map(patient => (
-            <div key={patient.id} className='flex w-full items-center justify-center bg-indian-khaki-100 odd:bg-indian-khaki-200 mb-[5px] py-2 pr-2 shadow-md shadow-indian-khaki-400 hover:bg-indian-khaki-300 rounded-sm'>
+            <div key={patient.id} className='flex w-full items-center justify-center bg-indian-khaki-100 odd:bg-indian-khaki-200 mb-[5px] py-2 pr-2 shadow-md shadow-indian-khaki-400 hover:bg-indian-khaki-300 rounded-sm transition-all ease-in'>
               <div className='flex items-center justify-center'>
                 <button className='mx-2'>
                   <CheckboxIcon className='w-6' />
@@ -56,16 +56,16 @@ export function Table() {
                     {patient.timeSlotReservation.map(reservation => reservation.status)}
                   </p>
                 </div>
-                <div className='flex items-center justify-center space-x-1 w-1/3 text-white font-bold text-sm  group-hover/item:visible'>
-                  <button className='flex items-center justify-center bg-spectra-600/95 border rounded-md w-[100px] py-[1px] px-1 tracking-tight shadow-md shadow-indian-khaki-500 hover:bg-spectra-700 active:bg-spectra-500'>
+                <div className='flex items-center justify-center space-x-1 w-1/3 text-white font-bold text-sm invisible group-hover/item:visible transition-all ease-in'>
+                  <button className='flex items-center justify-center bg-spectra-600/95 border rounded-md w-[100px] py-[1px] px-1 tracking-tight shadow-md shadow-indian-khaki-500 hover:bg-spectra-700 active:bg-spectra-500 transition-all ease-in'>
                     <CheckIcon className='w-3 mr-1' />
                       Confirmar
                   </button>
-                  <button className='flex items-center justify-center bg-indian-khaki-500 border rounded-md w-[100px] py-[1px] px-1 tracking-tight shadow-md shadow-indian-khaki-500 hover:bg-indian-khaki-700 active:bg-indian-khaki-400'>
+                  <button className='flex items-center justify-center bg-indian-khaki-500 border rounded-md w-[100px] py-[1px] px-1 tracking-tight shadow-md shadow-indian-khaki-500 hover:bg-indian-khaki-700 active:bg-indian-khaki-400 transition-all ease-in'>
                     <ResetIcon className='w-3 mr-1' />
                       Reagendar
                   </button>
-                  <button className='flex items-center justify-center bg-red-500/95 border rounded-md w-[100px] py-[1px] px-1 tracking-tight shadow-md shadow-indian-khaki-500 hover:bg-red-700 active:bg-red-400'>
+                  <button className='flex items-center justify-center bg-red-500/95 border rounded-md w-[100px] py-[1px] px-1 tracking-tight shadow-md shadow-indian-khaki-500 hover:bg-red-700 active:bg-red-400 transition-all ease-in'>
                     <Cross1Icon className='w-3 mr-1' />
                       Cancelar
                   </button>
