@@ -19,7 +19,7 @@ export function NextScheduleCard() {
         </div>
       </div>
       <footer className='flex items-center w-full h-1/5 justify-center py-2 space-x-1 text-white font-bold text-sm bg-indian-khaki-500
-            rounded-b-xl border-b-[4px] rounded-x-sm border-x-[1.5px] border-indian-khaki-700 group/item'>
+            rounded-b-xl border-b-[4px] rounded-x-sm border-x-[1.5px] border-indian-khaki-700 group/item shadow-md shadow-indian-khaki-500'>
         <button className='flex items-center justify-center bg-spectra-600/95 border rounded-md min-[1366px]:min-w-[90px] max-[1367px]:min-w-[100px] py-[1px] px-1 shadow-md shadow-indian-khaki-700 tracking-tight  hover:bg-spectra-700 active:bg-spectra-500 transition-all ease-in'>
           <CheckIcon className='w-3 mr-1' />
             Confirmar

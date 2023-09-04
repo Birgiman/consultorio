@@ -5,7 +5,7 @@ import patientsMock from '../../../../app/utils/patientsMock.json';
 
 export function Table() {
   return (
-    <div className='rounded-xl border-spectra-500 border-y-[1.5px]'>
+    <div className='rounded-xl border-spectra-500 border-y-[1.5px] '>
       <div className='flex w-full items-center bg-indian-khaki-300 py-3 pr-2.5 rounded-t-xl border-b-[0.5px] border-spectra-500'>
         <button className='mx-2'>
           <CheckboxIcon className='w-6' />
