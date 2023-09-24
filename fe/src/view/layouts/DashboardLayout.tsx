@@ -18,7 +18,7 @@ export function DashboardLayout() {
       <div className='w-3/4 h-full'>
         <Outlet />
       </div>
-      <div className='ml-9'>
+      <div className='ml-9 z-10'>
         <HamburgerMenu />
       </div>
     </div>

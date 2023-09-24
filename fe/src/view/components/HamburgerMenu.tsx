@@ -10,7 +10,6 @@ export function HamburgerMenu() {
     function handleClickOutside(event: MouseEvent) {
       if (hamburgerMenuRef.current && !hamburgerMenuRef.current.contains(event.target as Node))
         setIsOpen(false);
-      console.log({isOpen});
     }
 
     if (isOpen) {
