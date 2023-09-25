@@ -1,39 +1,19 @@
 import { ArrowDownIcon, CheckIcon, CheckboxIcon, Cross1Icon, ResetIcon } from '@radix-ui/react-icons';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
 import 'swiper/css';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import { formateTimeSlotReservation } from '../../../../app/utils/formatTimeSlotReservation';
 import patientsMock from '../../../../app/utils/patientsMock.json';
 import { DatePickerInput } from '../../../components/DatePickerInput';
-import { SliderNavigation } from './SliderNavigation';
+import { WeekNavigation } from './WeekNavigation';
 
 export function Table() {
-
-  const dias = ['Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira'];
 
   return (
     <>
       <div className='flex mb-2'>
         <div className='w-[248px]'>
           <div className='relative'>
-            <Swiper
-              slidesPerView={1}
-              initialSlide={0}
-            >
-              <SliderNavigation />
-              {dias.map(dia => (
-                <SwiperSlide
-                  key={dia}
-                >
-                  <div className='tracking-tighter flex justify-center items-center'>
-                    <div>
-                      <strong className='w-fit text-lg'>{dia}</strong>
-                      <p className='flex w-fit underline underline-offset-4'>07 de Setembro de 2023</p>
-                    </div>
-                  </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
+            <WeekNavigation />
           </div>
         </div>
         <DatePickerInput />
