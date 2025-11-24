@@ -1,12 +1,43 @@
 import { ArrowDownIcon, CheckIcon, CheckboxIcon, Cross1Icon, ResetIcon } from '@radix-ui/react-icons';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
+import { useState } from 'react';
 import 'swiper/css';
+import { useScheduleActions } from '../../../../app/hooks/useScheduleActions';
 import { formateTimeSlotReservation } from '../../../../app/utils/formatTimeSlotReservation';
 import patientsMock from '../../../../app/utils/patientsMock.json';
 import { DatePickerInput } from '../../../components/DatePickerInput';
 import { WeekNavigation } from './WeekNavigation';
 
 export function Table() {
+  const { confirmSchedule, cancelSchedule } = useScheduleActions();
+  const [loadingScheduleId, setLoadingScheduleId] = useState<string | null>(null);
+
+  async function handleConfirm(scheduleId: string) {
+    try {
+      setLoadingScheduleId(scheduleId);
+      await confirmSchedule({ scheduleId });
+    } finally {
+      setLoadingScheduleId(null);
+    }
+  }
+
+  async function handleCancel(scheduleId: string) {
+    const confirmed = window.confirm('Tem certeza que deseja cancelar este agendamento?');
+
+    if (!confirmed) return;
+
+    try {
+      setLoadingScheduleId(scheduleId);
+      await cancelSchedule({ scheduleId });
+    } finally {
+      setLoadingScheduleId(null);
+    }
+  }
+
+  function handleReschedule(scheduleId: string) {
+    // TODO: Implementar modal de reagendamento
+    alert(`Reagendar agendamento: ${scheduleId}\n\nFuncionalidade será implementada em breve.`);
+  }
 
   return (
     <>
@@ -74,18 +105,39 @@ export function Table() {
                     </p>
                   </div>
                   <div className='flex items-center justify-center space-x-1 w-1/3 text-white font-bold text-sm invisible group-hover/item:visible transition-all ease-in'>
-                    <button className='flex items-center justify-center bg-spectra-600/95 border rounded-md w-[100px] py-[1px] px-1 tracking-tight shadow-md shadow-indian-khaki-500 hover:bg-spectra-700 active:bg-spectra-500 transition-all ease-in'>
-                      <CheckIcon className='w-3 mr-1' />
-                      Confirmar
-                    </button>
-                    <button className='flex items-center justify-center bg-indian-khaki-500 border rounded-md w-[100px] py-[1px] px-1 tracking-tight shadow-md shadow-indian-khaki-500 hover:bg-indian-khaki-700 active:bg-indian-khaki-400 transition-all ease-in'>
-                      <ResetIcon className='w-3 mr-1' />
-                      Reagendar
-                    </button>
-                    <button className='flex items-center justify-center bg-red-500/95 border rounded-md w-[100px] py-[1px] px-1 tracking-tight shadow-md shadow-indian-khaki-500 hover:bg-red-700 active:bg-red-400 transition-all ease-in'>
-                      <Cross1Icon className='w-3 mr-1' />
-                      Cancelar
-                    </button>
+                    {patient.timeSlotReservation.map(reservation => (
+                      <button
+                        key={`confirm-${reservation.id}`}
+                        className='flex items-center justify-center bg-spectra-600/95 border rounded-md w-[100px] py-[1px] px-1 tracking-tight shadow-md shadow-indian-khaki-500 hover:bg-spectra-700 active:bg-spectra-500 transition-all ease-in disabled:opacity-50 disabled:cursor-not-allowed'
+                        onClick={() => handleConfirm(reservation.id)}
+                        disabled={loadingScheduleId === reservation.id}
+                      >
+                        <CheckIcon className='w-3 mr-1' />
+                        {loadingScheduleId === reservation.id ? 'Aguarde...' : 'Confirmar'}
+                      </button>
+                    ))}
+                    {patient.timeSlotReservation.map(reservation => (
+                      <button
+                        key={`reschedule-${reservation.id}`}
+                        className='flex items-center justify-center bg-indian-khaki-500 border rounded-md w-[100px] py-[1px] px-1 tracking-tight shadow-md shadow-indian-khaki-500 hover:bg-indian-khaki-700 active:bg-indian-khaki-400 transition-all ease-in disabled:opacity-50 disabled:cursor-not-allowed'
+                        onClick={() => handleReschedule(reservation.id)}
+                        disabled={loadingScheduleId === reservation.id}
+                      >
+                        <ResetIcon className='w-3 mr-1' />
+                        Reagendar
+                      </button>
+                    ))}
+                    {patient.timeSlotReservation.map(reservation => (
+                      <button
+                        key={`cancel-${reservation.id}`}
+                        className='flex items-center justify-center bg-red-500/95 border rounded-md w-[100px] py-[1px] px-1 tracking-tight shadow-md shadow-indian-khaki-500 hover:bg-red-700 active:bg-red-400 transition-all ease-in disabled:opacity-50 disabled:cursor-not-allowed'
+                        onClick={() => handleCancel(reservation.id)}
+                        disabled={loadingScheduleId === reservation.id}
+                      >
+                        <Cross1Icon className='w-3 mr-1' />
+                        {loadingScheduleId === reservation.id ? 'Aguarde...' : 'Cancelar'}
+                      </button>
+                    ))}
                   </div>
                 </div>
               </div>
