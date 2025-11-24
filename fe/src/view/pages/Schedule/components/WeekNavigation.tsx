@@ -2,7 +2,8 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import { addDays, format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { useState } from 'react';
-import { default as Navigation, default as SwiperCore } from 'swiper';
+import { Navigation } from 'swiper/modules';
+import { Swiper as SwiperType } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { capitalizeFirstLetter } from '../../../../app/utils/capitalizeFirstLetters';
 
@@ -10,9 +11,7 @@ export function WeekNavigation() {
 
   const DIAS = ['Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira'];
   const [dataAtual, setDataAtual] = useState(new Date());
-  const [swiper, setSwiper] = useState<SwiperCore | null>(null);
-
-  SwiperCore.use([Navigation]);
+  const [swiper, setSwiper] = useState<SwiperType | null>(null);
 
   const avancarDia = () => {
     // Avança para o próximo dia adicionando 1 dia à data atual
@@ -34,6 +33,7 @@ export function WeekNavigation() {
       slidesPerView={1}
       initialSlide={0}
       loop={true}
+      modules={[Navigation]}
       onSwiper={(s) => setSwiper(s)}
     >
       <button

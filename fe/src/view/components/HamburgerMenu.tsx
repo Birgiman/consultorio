@@ -1,10 +1,15 @@
 import { CalendarIcon, ExitIcon, GearIcon, HamburgerMenuIcon, PersonIcon } from '@radix-ui/react-icons';
 import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import { cn } from '../../app/utils/cn';
+import { useAuth } from '../../app/hooks/useAuth';
 
 export function HamburgerMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const hamburgerMenuRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+  const { signout } = useAuth();
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -25,6 +30,27 @@ export function HamburgerMenu() {
 
   function handleChangeMenu() {
     setIsOpen(!isOpen);
+  }
+
+  function handleNavigateToSchedule() {
+    navigate('/dashboard/schedule');
+    setIsOpen(false);
+  }
+
+  function handleNavigateToAccounts() {
+    navigate('/dashboard/accounts');
+    setIsOpen(false);
+  }
+
+  function handleNavigateToSettings() {
+    navigate('/dashboard/settings');
+    setIsOpen(false);
+  }
+
+  function handleLogout() {
+    signout();
+    toast.success('Logout realizado com sucesso!');
+    setIsOpen(false);
   }
 
   return (
@@ -56,7 +82,7 @@ export function HamburgerMenu() {
                 ? 'border-[1.5px] hover:scale-110 hover:duration-100 transition-all duration-500'
                 : 'border-none bg-transparent shadow-none hover:scale-100 hover:text-spectra-200 transition-all duration-150'
             )}
-            onClick={handleChangeMenu}
+            onClick={handleNavigateToSchedule}
           >
             {isOpen ? 'Agenda' : ''}
             <CalendarIcon width={25} height={25} />
@@ -68,7 +94,7 @@ export function HamburgerMenu() {
                 ? 'border-[1.5px] hover:scale-110 hover:duration-100 transition-all duration-500'
                 : 'border-none bg-transparent shadow-none hover:scale-100 hover:text-spectra-200 transition-all duration-150'
             )}
-            onClick={handleChangeMenu}
+            onClick={handleNavigateToAccounts}
           >
             {isOpen ? 'Pacientes' : ''}
             <PersonIcon width={25} height={25} />
@@ -80,7 +106,7 @@ export function HamburgerMenu() {
                 ? 'border-[1.5px] hover:scale-110 hover:duration-100 transition-all duration-500'
                 : 'border-none bg-transparent shadow-none hover:scale-100 hover:text-spectra-200 transition-all duration-150'
             )}
-            onClick={handleChangeMenu}
+            onClick={handleNavigateToSettings}
           >
             {isOpen ? 'Configurações' : ''}
             <GearIcon width={25} height={25} />
@@ -92,7 +118,7 @@ export function HamburgerMenu() {
                 ? 'border-[1.5px] hover:scale-110 hover:duration-100 transition-all duration-500'
                 : 'border-none bg-transparent shadow-none hover:scale-100 hover:text-spectra-200 transition-all duration-150'
             )}
-            onClick={handleChangeMenu}
+            onClick={handleLogout}
           >
             {isOpen ? 'Sair' : ''}
             <ExitIcon width={25} height={25} />

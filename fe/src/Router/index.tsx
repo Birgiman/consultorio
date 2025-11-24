@@ -9,7 +9,12 @@ import { AuthGuard } from './AuthGuard';
 
 export function Router() {
   return (
-    <BrowserRouter>
+    <BrowserRouter
+      future={{
+        v7_startTransition: true,
+        v7_relativeSplatPath: true
+      }}
+    >
       <Routes>
 
         <Route path="/" element={<Navigate to="/auth/login" replace />} />
@@ -23,9 +28,9 @@ export function Router() {
 
 
         <Route element={<AuthGuard isPrivate />}>
-          <Route element={<DashboardLayout />}>
-            <Route path='/dashboard/schedule' element={<Schedule />} />
-            <Route path='/dashboard/accounts' element={<Accounts />} />
+          <Route path='/dashboard' element={<DashboardLayout />}>
+            <Route path='schedule' element={<Schedule />} />
+            <Route path='accounts' element={<Accounts />} />
           </Route>
         </Route>
       </Routes>

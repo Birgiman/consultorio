@@ -30,7 +30,7 @@ function PopoverContent({ children, className }: PopoverContentProps) {
     <RdxPopover.Portal>
       <RdxPopover.Content
         className={cn(
-          'bg-indian-khaki-200 p-3 shadow-md shadow-indian-khaki-700',
+          'bg-indian-khaki-200 p-3 shadow-md shadow-indian-khaki-700 rounded-md border-[1.5px] border-indian-khaki-900',
           className
         )}
       >
