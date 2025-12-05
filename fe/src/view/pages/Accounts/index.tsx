@@ -1,5 +1,6 @@
 import { MagnifyingGlassIcon, PlusIcon } from '@radix-ui/react-icons';
 import { useState } from 'react';
+import { ClientAcupunCode } from '../../../app/enums/clientAcupunCode';
 import { useClients } from '../../../app/hooks/useClients';
 import { Client, CreateClientParams, UpdateClientParams } from '../../../app/services/clientsService';
 import { Input } from '../../components/Input';
@@ -33,10 +34,26 @@ export function Accounts() {
     setSelectedClient(null);
   }
 
-  async function handleSubmit(data: CreateClientParams & { birthCity?: string; birthState?: string }) {
-    const submitData = {
-      ...data,
-      localBirth: data.localBirth || `${data.birthCity} ${data.birthState}`,
+  async function handleSubmit(data: {
+    name: string;
+    cpf: string;
+    email: string;
+    birthDate: string;
+    cid: string;
+    phoneNumber: string;
+    acupunCode: ClientAcupunCode;
+    birthCity: string;
+    birthState: string;
+  }) {
+    const submitData: CreateClientParams = {
+      name: data.name,
+      cpf: data.cpf,
+      email: data.email,
+      birthDate: data.birthDate,
+      localBirth: `${data.birthCity} ${data.birthState}`,
+      cid: data.cid,
+      phoneNumber: data.phoneNumber,
+      acupunCode: data.acupunCode,
     };
 
     if (selectedClient) {
@@ -66,6 +83,7 @@ export function Accounts() {
         <div className='flex gap-2 items-center'>
           <div className='relative'>
             <Input
+              name='search'
               placeholder='Buscar por nome, email ou CPF...'
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
