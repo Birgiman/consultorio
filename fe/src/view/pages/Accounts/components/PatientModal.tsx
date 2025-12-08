@@ -110,8 +110,6 @@ export function PatientModal({ isOpen, onClose, onSubmit, client, isLoading }: P
       birthState: data.birthState,
     };
 
-    console.log('Objeto do paciente criado/atualizado:', normalizedData);
-
     localStorage.setItem(`birthCity_${data.birthCity}`, data.birthState);
 
     await onSubmit(normalizedData);

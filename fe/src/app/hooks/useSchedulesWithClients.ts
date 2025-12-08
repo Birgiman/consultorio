@@ -16,7 +16,6 @@ export function useSchedulesWithClients(params?: GetSchedulesParams) {
     try {
       return combineSchedulesWithClients(schedules, clients);
     } catch (error) {
-      console.error('Erro ao combinar agendamentos com clientes:', error);
       return [];
     }
   }, [schedules, clients]);

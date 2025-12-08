@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
+import { QUERY_STALE_TIMES } from '../config/queryConfig';
 import { clientsService } from '../services/clientsService';
 
 export function useClients() {
@@ -8,7 +9,7 @@ export function useClients() {
   const { data: clients = [], isLoading, error } = useQuery({
     queryKey: ['clients'],
     queryFn: clientsService.getAll,
-    staleTime: 1000 * 60 * 5, // 5 minutos
+    staleTime: QUERY_STALE_TIMES.CLIENTS,
   });
 
   const { mutateAsync: createClient, isLoading: isCreating } = useMutation({

@@ -1,3 +1,4 @@
+import { TimeSlotReservationStatus } from '../enums/TimeSlotReservationStatus';
 import { Client } from '../services/clientsService';
 import { TimeSlotReservation } from '../services/scheduleService';
 
@@ -13,7 +14,6 @@ export function combineSchedulesWithClients(
     const client = clients.find(c => c.id === schedule.clientId);
 
     if (!client) {
-      console.error(`Cliente não encontrado para o agendamento ${schedule.id}`);
       throw new Error(`Cliente não encontrado para o agendamento ${schedule.id}`);
     }
 
@@ -29,12 +29,19 @@ export function getNextSchedule(
 ): ScheduleWithClient | null {
   const now = new Date();
 
-  const upcomingSchedules = schedules
-    .filter(s => s.status === 'SCHEDULED' || s.status === 'CONFIRMED')
-    .filter(s => new Date(s.date) > now)
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  const schedulesWithDates = schedules
+    .filter(s =>
+      s.status === TimeSlotReservationStatus.SCHEDULED ||
+      s.status === TimeSlotReservationStatus.CONFIRMED
+    )
+    .map(s => ({
+      schedule: s,
+      date: new Date(s.date),
+    }))
+    .filter(({ date }) => date > now)
+    .sort((a, b) => a.date.getTime() - b.date.getTime());
 
-  return upcomingSchedules[0] || null;
+  return schedulesWithDates[0]?.schedule || null;
 }
 
 export function getTimeUntilSchedule(scheduleDate: string): string {

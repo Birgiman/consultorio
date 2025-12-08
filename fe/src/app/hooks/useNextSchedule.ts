@@ -1,10 +1,11 @@
 import { useMemo } from 'react';
-import { useSchedulesWithClients } from './useSchedulesWithClients';
+import { TimeSlotReservationStatus } from '../enums/TimeSlotReservationStatus';
 import { getNextSchedule } from '../utils/scheduleHelpers';
+import { useSchedulesWithClients } from './useSchedulesWithClients';
 
 export function useNextSchedule() {
   const { schedulesWithClients, isLoading, error } = useSchedulesWithClients({
-    status: 'SCHEDULED',
+    status: TimeSlotReservationStatus.SCHEDULED,
   });
 
   const nextSchedule = useMemo(() => {

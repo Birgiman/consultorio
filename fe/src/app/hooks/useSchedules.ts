@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import { QUERY_STALE_TIMES } from '../config/queryConfig';
 import { scheduleService } from '../services/scheduleService';
 import type { GetSchedulesParams } from '../services/scheduleService';
 
@@ -6,7 +7,7 @@ export function useSchedules(params?: GetSchedulesParams) {
   const { data: schedules = [], isLoading, error, refetch } = useQuery({
     queryKey: ['schedules', params],
     queryFn: () => scheduleService.getAll(params),
-    staleTime: 1000 * 60 * 2,
+    staleTime: QUERY_STALE_TIMES.SCHEDULES,
   });
 
   return {
